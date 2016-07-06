@@ -32,6 +32,17 @@
     mode: 0750
   become: yes
 
+- name: Configuring kibana.service in systemd/system
+  template:
+    src: kibana.service.j2
+    dest: /lib/systemd/system/kibana.service
+  become: yes
+
+- name: Reload systemd
+  become: yes
+  command: systemctl daemon-reload
+
+
 - name: Logrotate log file
   template:
     src: logrotate.kibana.j2

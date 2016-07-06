@@ -11,3 +11,10 @@ filter {
     }
   }
 }
+
+input {
+  file {
+    path => "{{ logstash_directorylogpath_name }}"
+    type => "syslog"
+  }
+}
