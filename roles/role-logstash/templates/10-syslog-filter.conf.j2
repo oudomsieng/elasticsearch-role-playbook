@@ -12,9 +12,3 @@ filter {
   }
 }
 
-input {
-  file {
-    path => "{{ logstash_log_path }}"
-    type => "syslog"
-  }
-}
