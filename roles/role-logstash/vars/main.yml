@@ -1,0 +1,12 @@
+---
+# vars file for role-logstash
+logstash_version: 2.2
+elasticsearch_rpm_key: http://packages.elastic.co/GPG-KEY-elasticsearch
+elasticsearch_host: localhost
+logstash_repo_name: logstash.repo
+logstash_pkg_name: logstash
+logstash_service_name: logstash
+logstash_fileconf_name: 02-beats-input.conf
+logstash_syslog_filter: 10-syslog-filter.conf
+logstash_logconf_name: logging.yml
+logstash_log_path: /var/log/logstash-rotate
