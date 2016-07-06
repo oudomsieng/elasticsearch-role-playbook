@@ -47,8 +47,8 @@
   become: yes	
 
 - name: Restarting Elasticsearch
-  service: 
+  service:
     name: "{{ elasticsearch_service_name }}"
     state: restarted 
     enabled: yes
-  become: yes	
+  become: yes
