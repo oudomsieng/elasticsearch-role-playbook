@@ -1,11 +1,10 @@
 {{ elasticsearch_log_path }}/*.log {
-    daily
-    rotate 100
+    hourly
+    rotate 500
     size 50M
     copytruncate
     compress
     delaycompress
     missingok
     notifempty
-    create 0750 elasticsearch elasticsearch
 }
