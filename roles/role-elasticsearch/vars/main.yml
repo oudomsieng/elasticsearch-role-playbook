@@ -1,0 +1,8 @@
+---
+# vars file for role-elasticsearch
+elasticsearch_version: 2.x
+elasticsearch_rpm_key: http://packages.elastic.co/GPG-KEY-elasticsearch
+distribution_type: centos
+elasticsearch_host: localhost
+elasticsearch_java_version: 1.8.0-openjdk.x86_64
+elasticsearch_log_path: /var/log/elasticsearch

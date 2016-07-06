@@ -1,0 +1,11 @@
+---
+
+- hosts: ELASTIC
+  roles:
+   - role-kibana
+#  tasks:
+#  - debug: msg="test"
+#  - name: test reload
+#    service: name=sshd state=reloaded
+#    become: yes
+#  - include: roles/main.yml

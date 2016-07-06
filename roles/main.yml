@@ -1,0 +1,5 @@
+---
+
+#Include elastic
+- include: role-elasticsearch/tasks/main.yml
+- include: role-kibana/tasks/main.yml

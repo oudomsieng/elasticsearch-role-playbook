@@ -1,0 +1,6 @@
+[elasticsearch-{{ elasticsearch_version }}]
+name=Elasticsearch repository for {{ elasticsearch_version }} packages
+baseurl=http://packages.elastic.co/elasticsearch/{{ elasticsearch_version }}/{{ distribution_type }}
+gpgcheck=1
+gpgkey={{ elasticsearch_rpm_key }}
+enabled=1

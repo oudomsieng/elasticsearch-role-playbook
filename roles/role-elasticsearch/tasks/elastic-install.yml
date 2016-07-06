@@ -1,0 +1,23 @@
+---
+- include: java-install.yml
+- name: elastic-import-gpg | Import the Elasticsearch public GPG key into rpm
+  rpm_key:
+    state=absent
+    key={{ elasticsearch_rpm_key }}
+  become: yes
+- name: elastic-repo-file | Create a new yum repository file for Elasticsearch
+  template: 
+    src=elasticsearch.repo.j2
+    dest=/etc/yum.repos.d/elasticsearch.repo
+  become: yes
+- name: elastic-install | Install present elasticsearch
+  yum: name=elasticsearch state=present
+  become: yes
+- name: elastic-config | Configure elasticsearch
+  template:
+    src=elasticsearch.yml.j2
+    dest=/etc/elasticsearch/elasticsearch.yml
+  become: yes
+- name: elastic-reload | Reload elasticsearch
+  service: name=elasticsearch state=restarted enabled=yes
+  become: yes 

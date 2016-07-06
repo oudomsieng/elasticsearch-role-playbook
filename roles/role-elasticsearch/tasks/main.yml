@@ -1,0 +1,3 @@
+---
+# tasks file for role-elasticsearch
+- include: elastic-install.yml

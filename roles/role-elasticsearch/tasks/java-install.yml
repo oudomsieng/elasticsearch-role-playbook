@@ -1,0 +1,6 @@
+---
+- name: install one specific version {{ elasticsearch_java_version }} of java
+  yum:
+    name: "java-{{ elasticsearch_java_version }}"
+    state: present
+  become: yes
