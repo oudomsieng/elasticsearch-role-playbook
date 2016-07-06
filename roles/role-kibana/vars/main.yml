@@ -8,3 +8,5 @@ kibana_repo_name: kibana.repo
 kibana_pkg_name: kibana
 kibana_fileconf_name: kibana.yml
 kibana_service_name: kibana
+kibana_directorylogpath_name: /var/log/kibana-rotate
+kibana_filelogpath_name: "{{kibana_directorylogpath_name}}/kibana.log"
