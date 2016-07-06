@@ -25,9 +25,30 @@
     dest: "/etc/elasticsearch/{{ elasticsearch_fileconf_name }}"
   become: yes
 
+- name: Configure elasticsearch log path
+  template:
+    src: logging.yml.j2
+    dest: "/etc/elasticsearch/{{ elasticsearch_logconf_name }}"
+  become: yes
+
+- name: Create log path if not exist
+  file: 
+    path: "{{ elasticsearch_log_path }}"
+    owner: elasticsearch 
+    group: elasticsearch
+    state: directory
+    mode: 0750
+  become: yes
+
+- name: Logrotate configuration file
+  template:
+    src: logrotate.elasticsearch.j2
+    dest: /etc/logrotate.d/elasticsearch
+  become: yes	
+
 - name: Restarting Elasticsearch
   service: 
     name: "{{ elasticsearch_service_name }}"
     state: restarted 
     enabled: yes
-  become: yes 
+  become: yes	
