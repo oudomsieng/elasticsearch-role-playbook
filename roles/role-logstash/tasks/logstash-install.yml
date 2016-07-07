@@ -64,7 +64,17 @@
     src: 30-elasticsearch-output.conf.j2
     dest: "/etc/logstash/conf.d/{{ logstash_elasticsearch_output }}"
   become: yes
-
+  
+- name: Configure logstash-service
+  template:
+    src: logstash.service.j2
+    dest: "/lib/systemd/system/{{ logstash_service }}"
+  become: yes
+  
+- name: Reload systemctl
+  command: systemctl daemon-reload
+  become: yes
+  
 - name: Restart logstash
   service:
     name: "{{ logstash_service_name }}"
