@@ -5,8 +5,9 @@ elasticsearch_rpm_key: http://packages.elastic.co/GPG-KEY-elasticsearch
 distribution_type: centos
 elasticsearch_host: localhost
 elasticsearch_java_version: 1.8.0-openjdk.x86_64
-elasticsearch_log_path: /var/log/elasticsearch
+elasticsearch_log_path: /var/log/elasticsearch-rotate
 elasticsearch_pkg_name: elasticsearch
 elasticsearch_repo_name: elasticsearch.repo
 elasticsearch_service_name: elasticsearch
 elasticsearch_fileconf_name: elasticsearch.yml
+elasticsearch_logconf_name: logging.yml
