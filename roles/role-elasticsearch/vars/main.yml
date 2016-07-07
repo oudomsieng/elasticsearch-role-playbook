@@ -6,3 +6,7 @@ distribution_type: centos
 elasticsearch_host: localhost
 elasticsearch_java_version: 1.8.0-openjdk.x86_64
 elasticsearch_log_path: /var/log/elasticsearch
+elasticsearch_pkg_name: elasticsearch
+elasticsearch_repo_name: elasticsearch.repo
+elasticsearch_service_name: elasticsearch
+elasticsearch_fileconf_name: elasticsearch.yml

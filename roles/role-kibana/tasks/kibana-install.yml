@@ -1,22 +1,31 @@
 ---
-- name: elastic-import-gpg | Import the Elasticsearch public GPG key into rpm
+- name: Importing the Elasticsearch public GPG key into rpm
   rpm_key:
-    state=absent
-    key={{ elasticsearch_rpm_key }}
+    state: absent
+    key: "{{ elasticsearch_rpm_key }}"
   become: yes
-- name: kibana-repo-file | Create a new yum repository file for Kibana
+
+- name: Creating a new yum repository file for Kibana
   template:
-    src=kibana.repo.j2
-    dest=/etc/yum.repos.d/kibana.repo
+    src: kibana.repo.j2
+    dest: "/etc/yum.repos.d/{{ kibana_repo_name }}"
   become: yes
-- name: kibana-install | Install present kibana
-  yum: name=kibana state=present
+
+- name: Installing Kibana package from repo
+  yum: 
+    name: "{{ kibana_pkg_name }}"
+    state: present
   become: yes
-- name: kibana-config | Configure kibana
+
+- name: Configuring Kibana
   template:
-    src=kibana.yml.j2
-    dest=/opt/kibana/config/kibana.yml
+    src: kibana.yml.j2
+    dest: "/opt/kibana/config/{{ kibana_fileconf_name }}"
   become: yes
-- name: kibana-reload | Reload Kibana
-  service: name=kibana state=reloaded enabled=yes
+
+- name: Restarted Kibana
+  service: 
+    name: "{{ kibana_service_name }}"
+    state: restarted 
+    enabled: yes
   become: yes
