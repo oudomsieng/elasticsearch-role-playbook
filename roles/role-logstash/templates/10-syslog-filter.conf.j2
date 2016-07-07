@@ -14,7 +14,7 @@ filter {
 
 input {
   file {
-    path => "{{ logstash_directorylogpath_name }}"
+    path => "{{ logstash_log_path }}"
     type => "syslog"
   }
 }

@@ -40,7 +40,7 @@
 
 - name: Create log path if not exist
   file: 
-    path: "{{ logstash_directorylogpath_name }}"
+    path: "{{ logstash_log_path }}"
     owner: logstash 
     group: root
     state: directory
@@ -74,6 +74,12 @@
 - name: Reload systemctl
   command: systemctl daemon-reload
   become: yes
+
+- name: Logrotate configuration file
+  template:
+    src: logrotate.logstash.j2
+    dest: /etc/logrotate.d/logstash
+  become: yes  
   
 - name: Restart logstash
   service:
