@@ -1,0 +1,4 @@
+---
+
+- include: logstash-install.yml
+# tasks file for role-logstash

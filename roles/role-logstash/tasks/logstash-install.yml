@@ -1,0 +1,48 @@
+---
+
+- name: Checking if ansible_distribution_major_version and ansible_distribution are not defined
+  fail:
+    msg: "Ansible distribution or ansible distribution version are not defined"
+  when: ansible_distribution_major_version is not defined or ansible_distribution is not defined
+
+- name: Checking if target server is not RHEL7
+  fail:
+    msg: "This role can only be run on CentOS 7 servers"
+  when: ansible_distribution != "CentOS" or (ansible_distribution == "CentOS" and ansible_distribution_major_version != "7")
+
+- name: Importing the Elasticsearch public GPG key into rpm
+  rpm_key:
+    state: absent
+    key: "{{ elasticsearch_rpm_key }}"
+  become: yes
+
+- name: Creating a new yum repository file for logstash
+  template:
+    src: logstash.repo.j2
+    dest: "/etc/yum.repos.d/{{ logstash_repo_name }}"
+  become: yes
+
+- name: Installing logstash pkg from repo
+  yum: 
+    name: "{{ logstash_pkg_name }}"
+    state: present
+  become: yes
+  
+- name: Configure logstash
+  template:
+    src: 02-beats-input.conf.j2
+    dest: "/etc/logstash/conf.d/{{ logstash_fileconf_name }}"
+  become: yes
+
+- name: Configure syslog filter
+  template:
+    src: 10-syslog-filter.conf.j2
+    dest: "/etc/logstash/conf.d/{{ logstash_syslog_filter }}"
+  become: yes
+
+- name: Restart logstash
+  service:
+    name: "{{ logstash_service_name }}"
+    state: restarted 
+    enabled: yes
+  become: yes
