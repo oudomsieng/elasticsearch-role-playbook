@@ -5,7 +5,7 @@
     msg: "Ansible distribution or ansible distribution version are not defined"
   when: ansible_distribution_major_version is not defined or ansible_distribution is not defined
 
-- name: Checking if target server is not RHEL7
+- name: Checking if target server is not CentOS 7
   fail:
     msg: "This role can only be run on CentOS 7 servers"
   when: ansible_distribution != "CentOS" or (ansible_distribution == "CentOS" and ansible_distribution_major_version != "7")
@@ -38,12 +38,27 @@
     dest: "/etc/logstash/conf.d/{{ logstash_fileconf_name }}"
   become: yes
 
+- name: Create log path if not exist
+  file: 
+    path: "{{ logstash_directorylogpath_name }}"
+    owner: logstash 
+    group: root
+    state: directory
+    mode: 0750
+  become: yes
+
 - name: Configure syslog filter
   template:
     src: 10-syslog-filter.conf.j2
     dest: "/etc/logstash/conf.d/{{ logstash_syslog_filter }}"
   become: yes
-  
+ 
+- name: Logrotate log file
+  template:
+    src: logrotate.logstash.j2
+    dest: /etc/logrotate.d/logstash
+  become: yes
+ 
 - name: Configure elasticsearch-output
   template:
     src: 30-elasticsearch-output.conf.j2

@@ -41,6 +41,16 @@
     mode: 0750
   become: yes
 
+- name: Configuring elasticsearch.service in systemd/system
+  template:
+    src: elasticsearch.service.j2
+    dest: /lib/systemd/system/elasticsearch.service
+  become: yes
+
+- name: Reload systemd
+  become: yes
+  command: systemctl daemon-reload
+
 - name: Logrotate configuration file
   template:
     src: logrotate.elasticsearch.j2

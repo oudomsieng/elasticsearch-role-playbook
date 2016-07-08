@@ -11,6 +11,7 @@ logstash_fileconf_name: 02-beats-input.conf
 logstash_syslog_filter: 10-syslog-filter.conf
 logstash_elasticsearch_output: 30-elasticsearch-output.conf
 logstash_logconf_name: logging.yml
-logstash_log_path: /var/log/logstash-rotate
+logstash_directorylogpath_name: /var/log/logstash-rotate
 logstash_forwarder_cert: /etc/pki/tls/certs/logstash-forwarder.crt
 logstash_forwarder_key: /etc/pki/tls/certs/logstash-forwarder.key
+
