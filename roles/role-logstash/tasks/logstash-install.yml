@@ -27,6 +27,10 @@
     name: "{{ logstash_pkg_name }}"
     state: present
   become: yes
+
+- name: Create self-signed SSL cert
+  command: openssl req -subj "/CN=${ansible_fqdn}" -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout {{ logstash_forwarder_key }} -out {{ logstash_forwarder_cert }}
+  become: yes
   
 - name: Configure logstash
   template:
@@ -38,6 +42,12 @@
   template:
     src: 10-syslog-filter.conf.j2
     dest: "/etc/logstash/conf.d/{{ logstash_syslog_filter }}"
+  become: yes
+  
+- name: Configure elasticsearch-output
+  template:
+    src: 30-elasticsearch-output.conf.j2
+    dest: "/etc/logstash/conf.d/{{ logstash_elasticsearch_output }}"
   become: yes
 
 - name: Restart logstash
