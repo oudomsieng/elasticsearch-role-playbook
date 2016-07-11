@@ -15,5 +15,5 @@ User=logstash
 Group=logstash
 
 Type=simple
-ExecStart=/opt/logstash/bin/logstash agent -f /etc/logstash/conf.d -l /var/log/logstash/logstash.log
+ExecStart=/opt/logstash/bin/logstash agent -f /etc/logstash/conf.d -l {{ logstash_log_path }}/logstash.log
 restart=always
