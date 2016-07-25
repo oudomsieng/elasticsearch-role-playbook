@@ -3,7 +3,7 @@
 elasticsearch_rpm_key: http://packages.elastic.co/GPG-KEY-elasticsearch
 kibana_version: 4.4
 distribution_type: centos
-elasticsearch_host: localhost
+#elasticsearch_host: 192.168.56.101
 kibana_repo_name: kibana.repo
 kibana_pkg_name: kibana
 kibana_fileconf_name: kibana.yml
