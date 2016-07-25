@@ -2,6 +2,12 @@
 
 - hosts: ELASTIC
   roles:
+   - role-logstash
+     #{ role: role-logstash, 
+     #  elk_host: "{{ groups['ELASTIC'][0] }}",
+     #  elk_fqdn: localhost.localdomain 
+     #}
+   - role-elasticsearch
    - role-kibana
 #  tasks:
 #  - debug: msg="test"

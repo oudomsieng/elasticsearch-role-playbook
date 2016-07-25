@@ -1,2 +1,2 @@
-server.host: "{{ elasticsearch_host }}"
+server.host: "{{ ansible_eth1.ipv4.address }}"
 logging.dest: "{{ kibana_filelogpath_name }}"

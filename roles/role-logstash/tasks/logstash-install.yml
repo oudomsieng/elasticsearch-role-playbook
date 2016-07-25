@@ -28,9 +28,15 @@
     state: present
   become: yes
 
-- name: Create self-signed SSL cert
-  command: openssl req -subj "/CN=${ansible_fqdn}" -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout {{ logstash_forwarder_key }} -out {{ logstash_forwarder_cert }}
-  become: yes
+#- name: Configure openssl
+#  template:
+#    src: openssl.cnf.j2
+#    dest: "/etc/pki/tls/{{ openssl_fileconf_name }}"
+#  become: yes
+
+#- name: Create self-signed SSL cert
+#  command: openssl req -subj '/CN={{ elk_fqdn }}/' -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout {{ logstash_forwarder_key }} -out {{ logstash_forwarder_cert }}
+#  become: yes
   
 - name: Configure logstash
   template:
